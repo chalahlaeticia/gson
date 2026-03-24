@@ -41,6 +41,7 @@ import java.util.List;
  */
 public final class JsonArray extends JsonElement implements Iterable<JsonElement> {
   private final ArrayList<JsonElement> elements;
+  private static final String SINGLE_ELEMENT_ERROR_MESSAGE = "Array must have size 1, but has size ";
 
   /** Creates an empty JsonArray. */
   @SuppressWarnings("deprecation") // superclass constructor
@@ -223,13 +224,13 @@ public final class JsonArray extends JsonElement implements Iterable<JsonElement
   /**
    * Returns the i-th element of the array.
    *
-   * @param i the index of the element that is being sought.
+   * @param index the index of the element that is being sought.
    * @return the element present at the i-th index.
    * @throws IndexOutOfBoundsException if {@code i} is negative or greater than or equal to the
    *     {@link #size()} of the array.
    */
-  public JsonElement get(int i) {
-    return elements.get(i);
+  public JsonElement get(int index) {
+    return elements.get(index);
   }
 
   private JsonElement getAsSingleElement() {
@@ -237,7 +238,8 @@ public final class JsonArray extends JsonElement implements Iterable<JsonElement
     if (size == 1) {
       return elements.get(0);
     }
-    throw new IllegalStateException("Array must have size 1, but has size " + size);
+
+    throw new IllegalStateException(SINGLE_ELEMENT_ERROR_MESSAGE + size);
   }
 
   /**
