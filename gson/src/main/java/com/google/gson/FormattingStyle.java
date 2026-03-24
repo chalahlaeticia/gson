@@ -37,10 +37,7 @@ import java.util.Objects;
  * @since 2.11.0
  */
 public class FormattingStyle {
-  private final String newline;
-  private final String indent;
-  private final boolean spaceAfterSeparators;
-
+  
   /**
    * The default compact formatting style:
    *
@@ -63,6 +60,13 @@ public class FormattingStyle {
    */
   public static final FormattingStyle PRETTY = new FormattingStyle("\n", "  ", true);
 
+
+  private final String newline;
+  private final String indent;
+  private final boolean spaceAfterSeparators;
+
+  
+  
   private FormattingStyle(String newline, String indent, boolean spaceAfterSeparators) {
     Objects.requireNonNull(newline, "newline == null");
     Objects.requireNonNull(indent, "indent == null");

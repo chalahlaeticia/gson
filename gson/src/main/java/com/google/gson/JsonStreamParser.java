@@ -56,8 +56,8 @@ public final class JsonStreamParser implements Iterator<JsonElement> {
    * @param json The string containing JSON elements concatenated to each other.
    * @since 1.4
    */
-  public JsonStreamParser(String json) {
-    this(new StringReader(json));
+  public JsonStreamParser(String jsonString ) {
+    this(new StringReader(jsonString));
   }
 
   /**
