@@ -35,11 +35,11 @@ public enum LongSerializationPolicy {
    */
   DEFAULT() {
     @Override
-    public JsonElement serialize(Long value) {
-      if (value == null) {
+    public JsonElement serialize(Long numberValue) {
+      if (numberValue == null) {
         return JsonNull.INSTANCE;
       }
-      return new JsonPrimitive(value);
+      return new JsonPrimitive(numberValue);
     }
 
     @Override

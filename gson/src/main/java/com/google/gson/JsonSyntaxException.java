@@ -22,7 +22,7 @@ package com.google.gson;
  * @author Joel Leitch
  */
 public final class JsonSyntaxException extends JsonParseException {
-
+  
   private static final long serialVersionUID = 1L;
 
   public JsonSyntaxException(String msg) {
