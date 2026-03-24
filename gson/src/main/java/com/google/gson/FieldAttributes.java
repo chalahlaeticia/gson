@@ -38,10 +38,10 @@ public final class FieldAttributes {
   /**
    * Constructs a Field Attributes object from the {@code f}.
    *
-   * @param f the field to pull attributes from
+   * @param field the field to pull attributes from
    */
-  public FieldAttributes(Field f) {
-    this.field = Objects.requireNonNull(f);
+  public FieldAttributes(Field field) {
+    this.field = Objects.requireNonNull(field);
   }
 
   /**
