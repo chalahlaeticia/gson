@@ -233,7 +233,7 @@ public final class JsonArray extends JsonElement implements Iterable<JsonElement
     return elements.get(index);
   }
 
-  private JsonElement getAsSingleElement() {
+  private JsonElement getOnlyElement() {
     int size = elements.size();
     if (size == 1) {
       return elements.get(0);
@@ -252,7 +252,7 @@ public final class JsonArray extends JsonElement implements Iterable<JsonElement
    */
   @Override
   public Number getAsNumber() {
-    return getAsSingleElement().getAsNumber();
+    return getOnlyElement().getAsNumber();
   }
 
   /**
@@ -265,7 +265,7 @@ public final class JsonArray extends JsonElement implements Iterable<JsonElement
    */
   @Override
   public String getAsString() {
-    return getAsSingleElement().getAsString();
+    return getOnlyElement().getAsString();
   }
 
   /**
@@ -278,7 +278,7 @@ public final class JsonArray extends JsonElement implements Iterable<JsonElement
    */
   @Override
   public double getAsDouble() {
-    return getAsSingleElement().getAsDouble();
+    return getOnlyElement().getAsDouble();
   }
 
   /**
@@ -292,7 +292,7 @@ public final class JsonArray extends JsonElement implements Iterable<JsonElement
    */
   @Override
   public BigDecimal getAsBigDecimal() {
-    return getAsSingleElement().getAsBigDecimal();
+    return getOnlyElement().getAsBigDecimal();
   }
 
   /**
@@ -306,7 +306,7 @@ public final class JsonArray extends JsonElement implements Iterable<JsonElement
    */
   @Override
   public BigInteger getAsBigInteger() {
-    return getAsSingleElement().getAsBigInteger();
+    return getOnlyElement().getAsBigInteger();
   }
 
   /**
@@ -319,7 +319,7 @@ public final class JsonArray extends JsonElement implements Iterable<JsonElement
    */
   @Override
   public float getAsFloat() {
-    return getAsSingleElement().getAsFloat();
+    return getOnlyElement().getAsFloat();
   }
 
   /**
@@ -332,7 +332,7 @@ public final class JsonArray extends JsonElement implements Iterable<JsonElement
    */
   @Override
   public long getAsLong() {
-    return getAsSingleElement().getAsLong();
+    return getOnlyElement().getAsLong();
   }
 
   /**
@@ -345,7 +345,7 @@ public final class JsonArray extends JsonElement implements Iterable<JsonElement
    */
   @Override
   public int getAsInt() {
-    return getAsSingleElement().getAsInt();
+    return getOnlyElement().getAsInt();
   }
 
   /**
@@ -358,7 +358,7 @@ public final class JsonArray extends JsonElement implements Iterable<JsonElement
    */
   @Override
   public byte getAsByte() {
-    return getAsSingleElement().getAsByte();
+    return getOnlyElement().getAsByte();
   }
 
   /**
@@ -374,7 +374,7 @@ public final class JsonArray extends JsonElement implements Iterable<JsonElement
   @Deprecated
   @Override
   public char getAsCharacter() {
-    return getAsSingleElement().getAsCharacter();
+    return getOnlyElement().getAsCharacter();
   }
 
   /**
@@ -387,7 +387,7 @@ public final class JsonArray extends JsonElement implements Iterable<JsonElement
    */
   @Override
   public short getAsShort() {
-    return getAsSingleElement().getAsShort();
+    return getOnlyElement().getAsShort();
   }
 
   /**
@@ -400,7 +400,7 @@ public final class JsonArray extends JsonElement implements Iterable<JsonElement
    */
   @Override
   public boolean getAsBoolean() {
-    return getAsSingleElement().getAsBoolean();
+    return getOnlyElement().getAsBoolean();
   }
 
   /**
