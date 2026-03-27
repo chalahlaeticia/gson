@@ -32,7 +32,7 @@ import java.math.BigDecimal;
  * @since 2.8.9
  */
 public enum ToNumberPolicy implements ToNumberStrategy {
-
+   private static final char DECIMAL_SEPARATOR = '.';
   /**
    * Using this policy will ensure that numbers will be read as {@link Double} values. This is the
    * default strategy used during deserialization of numbers as {@link Object}.
@@ -68,7 +68,7 @@ public enum ToNumberPolicy implements ToNumberStrategy {
     @Override
     public Number readNumber(JsonReader in) throws IOException, JsonParseException {
       String value = in.nextString();
-      if (value.indexOf('.') >= 0) {
+      if (value.indexOf(DECIMAL_SEPARATOR) >= 0) {
         return parseAsDouble(value, in);
       } else {
         try {
