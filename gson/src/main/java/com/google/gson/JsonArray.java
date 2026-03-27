@@ -42,7 +42,8 @@ import java.util.List;
 public final class JsonArray extends JsonElement implements Iterable<JsonElement> {
   private final ArrayList<JsonElement> elements;
   private static final String SINGLE_ELEMENT_ERROR_MESSAGE = "Array must have size 1, but has size ";
-
+  private static final int SINGLE_ELEMENT_SIZE = 1;
+  private static final int FIRST_ELEMENT_INDEX = 0;
   /** Creates an empty JsonArray. */
   @SuppressWarnings("deprecation") // superclass constructor
   public JsonArray() {
@@ -233,10 +234,10 @@ public final class JsonArray extends JsonElement implements Iterable<JsonElement
     return elements.get(index);
   }
 
-  private JsonElement getOnlyElement() {
+  private JsonElement getAsSingleElement() {
     int size = elements.size();
-    if (size == 1) {
-      return elements.get(0);
+    if (size == SINGLE_ELEMENT_SIZE) {
+      return elements.get(FIRST_ELEMENT_INDEX);
     }
 
     throw new IllegalStateException(SINGLE_ELEMENT_ERROR_MESSAGE + size);
@@ -252,7 +253,7 @@ public final class JsonArray extends JsonElement implements Iterable<JsonElement
    */
   @Override
   public Number getAsNumber() {
-    return getOnlyElement().getAsNumber();
+    return getAsSingleElement().getAsNumber();
   }
 
   /**
@@ -265,7 +266,7 @@ public final class JsonArray extends JsonElement implements Iterable<JsonElement
    */
   @Override
   public String getAsString() {
-    return getOnlyElement().getAsString();
+    return getAsSingleElement().getAsString();
   }
 
   /**
@@ -278,7 +279,7 @@ public final class JsonArray extends JsonElement implements Iterable<JsonElement
    */
   @Override
   public double getAsDouble() {
-    return getOnlyElement().getAsDouble();
+    return getAsSingleElement().getAsDouble();
   }
 
   /**
@@ -292,7 +293,7 @@ public final class JsonArray extends JsonElement implements Iterable<JsonElement
    */
   @Override
   public BigDecimal getAsBigDecimal() {
-    return getOnlyElement().getAsBigDecimal();
+    return getAsSingleElement().getAsBigDecimal();
   }
 
   /**
@@ -306,7 +307,7 @@ public final class JsonArray extends JsonElement implements Iterable<JsonElement
    */
   @Override
   public BigInteger getAsBigInteger() {
-    return getOnlyElement().getAsBigInteger();
+    return getAsSingleElement().getAsBigInteger();
   }
 
   /**
@@ -319,7 +320,7 @@ public final class JsonArray extends JsonElement implements Iterable<JsonElement
    */
   @Override
   public float getAsFloat() {
-    return getOnlyElement().getAsFloat();
+    return getAsSingleElement().getAsFloat();
   }
 
   /**
@@ -332,7 +333,7 @@ public final class JsonArray extends JsonElement implements Iterable<JsonElement
    */
   @Override
   public long getAsLong() {
-    return getOnlyElement().getAsLong();
+    return getAsSingleElement().getAsLong();
   }
 
   /**
@@ -345,7 +346,7 @@ public final class JsonArray extends JsonElement implements Iterable<JsonElement
    */
   @Override
   public int getAsInt() {
-    return getOnlyElement().getAsInt();
+    return getAsSingleElement().getAsInt();
   }
 
   /**
@@ -358,7 +359,7 @@ public final class JsonArray extends JsonElement implements Iterable<JsonElement
    */
   @Override
   public byte getAsByte() {
-    return getOnlyElement().getAsByte();
+    return getAsSingleElement().getAsByte();
   }
 
   /**
@@ -374,7 +375,7 @@ public final class JsonArray extends JsonElement implements Iterable<JsonElement
   @Deprecated
   @Override
   public char getAsCharacter() {
-    return getOnlyElement().getAsCharacter();
+    return getAsSingleElement().getAsCharacter();
   }
 
   /**
@@ -387,7 +388,7 @@ public final class JsonArray extends JsonElement implements Iterable<JsonElement
    */
   @Override
   public short getAsShort() {
-    return getOnlyElement().getAsShort();
+    return getAsSingleElement().getAsShort();
   }
 
   /**
@@ -400,7 +401,7 @@ public final class JsonArray extends JsonElement implements Iterable<JsonElement
    */
   @Override
   public boolean getAsBoolean() {
-    return getOnlyElement().getAsBoolean();
+    return getAsSingleElement().getAsBoolean();
   }
 
   /**
