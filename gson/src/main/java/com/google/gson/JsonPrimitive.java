@@ -291,23 +291,42 @@ public final class JsonPrimitive extends JsonElement {
       return other.value == null;
     }
     if (isIntegral(this) && isIntegral(other)) {
-      return (this.value instanceof BigInteger || other.value instanceof BigInteger)
-          ? this.getAsBigInteger().equals(other.getAsBigInteger())
-          : this.getAsNumber().longValue() == other.getAsNumber().longValue();
+      return hasEqualIntegralValue(other);
     }
-    if (value instanceof Number && other.value instanceof Number) {
-      if (value instanceof BigDecimal && other.value instanceof BigDecimal) {
-        // Uses compareTo to ignore scale of values, e.g. `0` and `0.00` should be considered equal
-        return this.getAsBigDecimal().compareTo(other.getAsBigDecimal()) == 0;
-      }
 
-      double thisAsDouble = this.getAsDouble();
-      double otherAsDouble = other.getAsDouble();
-      // Don't use Double.compare(double, double) because that considers -0.0 and +0.0 not equal
-      return (thisAsDouble == otherAsDouble)
-          || (Double.isNaN(thisAsDouble) && Double.isNaN(otherAsDouble));
+    if (value instanceof Number && other.value instanceof Number) {
+      return hasEqualDecimalValue(other);
     }
+
     return value.equals(other.value);
+  }
+  /**
+   * Compare deux JsonPrimitive contenant des valeurs entières.
+   * Gère les cas où les valeurs sont des BigInteger ou des types numériques standards.
+   * Permet de comparer correctement les valeurs sans perte de précision.
+   */
+  private boolean hasEqualIntegralValue(JsonPrimitive other) {
+    return (this.value instanceof BigInteger || other.value instanceof BigInteger)
+            ? this.getAsBigInteger().equals(other.getAsBigInteger())
+            : this.getAsNumber().longValue() == other.getAsNumber().longValue();
+  }
+
+  /**
+   * Compare deux JsonPrimitive contenant des valeurs décimales.
+   * Utilise compareTo pour les BigDecimal afin d’ignorer les différences d’échelle
+   * (par exemple 0 et 0.00 sont considérés comme égaux).
+   * Gère également les cas particuliers comme NaN.
+   */
+  private boolean hasEqualDecimalValue(JsonPrimitive other) {
+    if (value instanceof BigDecimal && other.value instanceof BigDecimal) {
+      return this.getAsBigDecimal().compareTo(other.getAsBigDecimal()) == 0;
+    }
+
+    double thisAsDouble = this.getAsDouble();
+    double otherAsDouble = other.getAsDouble();
+
+    return (thisAsDouble == otherAsDouble)
+            || (Double.isNaN(thisAsDouble) && Double.isNaN(otherAsDouble));
   }
 
   /**
