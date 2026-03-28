@@ -128,6 +128,13 @@ public abstract class TypeAdapter<T> {
    * @param value the Java object to write. May be null.
    */
   public abstract void write(JsonWriter out, T value) throws IOException;
+  /**
+   * Reads one JSON value (an array, object, string, number, boolean or null) and converts it to a
+   * Java object. Returns the converted object.
+   *
+   * @return the converted Java object. May be {@code null}.
+   */
+  public abstract T read(JsonReader in) throws IOException;
 
   /**
    * Converts {@code value} to a JSON document and writes it to {@code out}.
@@ -185,13 +192,7 @@ public abstract class TypeAdapter<T> {
     }
   }
 
-  /**
-   * Reads one JSON value (an array, object, string, number, boolean or null) and converts it to a
-   * Java object. Returns the converted object.
-   *
-   * @return the converted Java object. May be {@code null}.
-   */
-  public abstract T read(JsonReader in) throws IOException;
+
 
   /**
    * Converts the JSON document in {@code in} to a Java object.
@@ -304,7 +305,6 @@ public abstract class TypeAdapter<T> {
         TypeAdapter.this.write(out, value);
       }
     }
-
     @Override
     public T read(JsonReader reader) throws IOException {
       if (reader.peek() == JsonToken.NULL) {
@@ -313,6 +313,8 @@ public abstract class TypeAdapter<T> {
       }
       return TypeAdapter.this.read(reader);
     }
+
+
 
     @Override
     public String toString() {
