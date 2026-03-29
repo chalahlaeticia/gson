@@ -107,7 +107,6 @@ public final class ObjectTypeAdapter extends TypeAdapter<Object> {
 
   @Override
   public Object read(JsonReader in) throws IOException {
-    // Either List or Map
     Object current;
     JsonToken peeked = in.peek();
 
@@ -121,7 +120,6 @@ public final class ObjectTypeAdapter extends TypeAdapter<Object> {
     while (true) {
       while (in.hasNext()) {
         String name = null;
-        // Name is only used for JSON object members
         if (current instanceof Map) {
           name = in.nextName();
         }
@@ -134,15 +132,7 @@ public final class ObjectTypeAdapter extends TypeAdapter<Object> {
           value = readTerminal(in, peeked);
         }
 
-        if (current instanceof List) {
-          @SuppressWarnings("unchecked")
-          List<Object> list = (List<Object>) current;
-          list.add(value);
-        } else {
-          @SuppressWarnings("unchecked")
-          Map<String, Object> map = (Map<String, Object>) current;
-          map.put(name, value);
-        }
+        addValueToCurrent(current, name, value);
 
         if (isNesting) {
           stack.addLast(current);
@@ -150,21 +140,46 @@ public final class ObjectTypeAdapter extends TypeAdapter<Object> {
         }
       }
 
-      // End current element
-      if (current instanceof List) {
-        in.endArray();
-      } else {
-        in.endObject();
-      }
+      closeCurrentElement(in, current);
 
       if (stack.isEmpty()) {
         return current;
-      } else {
-        // Continue with enclosing element
-        current = stack.removeLast();
       }
+
+      current = stack.removeLast();
+    }
+
+  }
+  /**
+   * Ajoute une valeur au conteneur courant.
+   * Si l'élément courant est une liste, la valeur est ajoutée à la liste.
+   * Sinon, l'élément courant est considéré comme une map et la valeur est ajoutée avec son nom.
+   */
+  private void addValueToCurrent(Object current, String name, Object value) {
+    if (current instanceof List) {
+      @SuppressWarnings("unchecked")
+      List<Object> list = (List<Object>) current;
+      list.add(value);
+    } else {
+      @SuppressWarnings("unchecked")
+      Map<String, Object> map = (Map<String, Object>) current;
+      map.put(name, value);
     }
   }
+  /**
+   * Ferme l’élément JSON courant dans le lecteur.
+   * Si l’élément courant est une liste, ferme un tableau JSON.
+   * Sinon, ferme un objet JSON.
+   */
+  private void closeCurrentElement(JsonReader in, Object current) throws IOException {
+    if (current instanceof List) {
+      in.endArray();
+    } else {
+      in.endObject();
+    }
+  }
+
+
 
   @Override
   public void write(JsonWriter out, Object value) throws IOException {
