@@ -134,12 +134,8 @@ public final class JsonParser {
    * @since 2.8.6
    */
   public static JsonElement parseReader(JsonReader reader)
-      throws JsonIOException, JsonSyntaxException {
-    Strictness strictness = reader.getStrictness();
-    if (strictness == Strictness.LEGACY_STRICT) {
-      // For backward compatibility change to LENIENT if reader has default strictness LEGACY_STRICT
-      reader.setStrictness(Strictness.LENIENT);
-    }
+          throws JsonIOException, JsonSyntaxException {
+    Strictness strictness = prepareReaderStrictness(reader);
     try {
       return Streams.parse(reader);
     } catch (StackOverflowError | OutOfMemoryError e) {
@@ -147,6 +143,14 @@ public final class JsonParser {
     } finally {
       reader.setStrictness(strictness);
     }
+  }
+
+  private static Strictness prepareReaderStrictness(JsonReader reader) {
+    Strictness strictness = reader.getStrictness();
+    if (strictness == Strictness.LEGACY_STRICT) {
+      reader.setStrictness(Strictness.LENIENT);
+    }
+    return strictness;
   }
 
   /**
