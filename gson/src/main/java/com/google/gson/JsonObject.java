@@ -20,6 +20,7 @@ import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.gson.internal.LinkedTreeMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.NoSuchElementException;
 
 /**
  * A class representing an object type in JSON. An object consists of name-value pairs where names
@@ -187,6 +188,20 @@ public final class JsonObject extends JsonElement {
     return members.get(memberName);
   }
 
+  /**
+   * Returns the member with the specified name.
+   *
+   * @param memberName name of the member being requested.
+   * @return the member matching the name.
+   * @throws NoSuchElementException if no member with this name exists.
+   */
+  public JsonElement getRequired(String memberName) {
+    JsonElement element = members.get(memberName);
+    if (element == null) {
+      throw new NoSuchElementException("No member named '" + memberName + "' exists.");
+    }
+    return element;
+  }
   /**
    * Convenience method to get the specified member as a {@link JsonPrimitive}.
    *
