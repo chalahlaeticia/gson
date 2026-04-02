@@ -32,7 +32,7 @@ import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
 import org.junit.Test;
-
+import java.util.NoSuchElementException;
 /**
  * Unit test for the {@link JsonObject} class.
  *
@@ -354,5 +354,28 @@ public class JsonObjectTest {
     object.add("d", nestedObject);
     assertThat(object.toString())
         .isEqualTo("{\"a\":null,\"b\\u0000\":NaN,\"c\":[\"\\\"\"],\"d\":{\"n\\u0000\":1}}");
+  }
+
+
+  @Test
+  public void testGetRequiredReturnsElementWhenMemberExists() {
+    JsonObject jsonObject = new JsonObject();
+    JsonPrimitive value = new JsonPrimitive("test");
+    jsonObject.add("name", value);
+
+    JsonElement result = jsonObject.getRequired("name");
+
+    assertThat(result).isEqualTo(value);
+  }
+
+
+  @Test
+  public void testGetRequiredThrowsExceptionWhenMemberDoesNotExist() {
+    JsonObject jsonObject = new JsonObject();
+
+    NoSuchElementException exception =
+            assertThrows(NoSuchElementException.class, () -> jsonObject.getRequired("missing"));
+
+    assertThat(exception).hasMessageThat().isEqualTo("No member named 'missing' exists.");
   }
 }
