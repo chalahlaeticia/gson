@@ -378,4 +378,19 @@ public class JsonObjectTest {
 
     assertThat(exception).hasMessageThat().isEqualTo("No member named 'missing' exists.");
   }
+
+  @Test
+  public void testAddPropertyNullValuesAreConvertedToJsonNull() {
+    JsonObject jsonObject = new JsonObject();
+
+    jsonObject.addProperty("string", (String) null);
+    jsonObject.addProperty("number", (Number) null);
+    jsonObject.addProperty("boolean", (Boolean) null);
+    jsonObject.addProperty("character", (Character) null);
+
+    assertThat(jsonObject.get("string")).isEqualTo(JsonNull.INSTANCE);
+    assertThat(jsonObject.get("number")).isEqualTo(JsonNull.INSTANCE);
+    assertThat(jsonObject.get("boolean")).isEqualTo(JsonNull.INSTANCE);
+    assertThat(jsonObject.get("character")).isEqualTo(JsonNull.INSTANCE);
+  }
 }
