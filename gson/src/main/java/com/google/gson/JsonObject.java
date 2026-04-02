@@ -135,6 +135,24 @@ public final class JsonObject extends JsonElement {
     add(property, createPropertyValue(value));
   }
 
+
+
+  private JsonElement createPropertyValue(String value) {
+    return value == null ? JsonNull.INSTANCE : new JsonPrimitive(value);
+  }
+
+  private JsonElement createPropertyValue(Number value) {
+    return value == null ? JsonNull.INSTANCE : new JsonPrimitive(value);
+  }
+
+  private JsonElement createPropertyValue(Boolean value) {
+    return value == null ? JsonNull.INSTANCE : new JsonPrimitive(value);
+  }
+
+  private JsonElement createPropertyValue(Character value) {
+    return value == null ? JsonNull.INSTANCE : new JsonPrimitive(value);
+  }
+
   /**
    * Returns a set of members of this object. The set is ordered, and the order is in which the
    * elements were added.
