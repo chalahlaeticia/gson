@@ -27,7 +27,7 @@ import com.google.gson.internal.bind.CollectionTypeAdapterFactory;
 import com.google.gson.internal.bind.DefaultDateTypeAdapter;
 import com.google.gson.internal.bind.JsonAdapterAnnotationTypeAdapterFactory;
 import com.google.gson.internal.bind.MapTypeAdapterFactory;
-import com.google.gson.internal.bind.NumberTypeAdapter;
+import com.google.gson.internal.bind.NumberTypeAdapters;
 import com.google.gson.internal.bind.ObjectTypeAdapter;
 import com.google.gson.internal.bind.ReflectiveTypeAdapterFactory;
 import com.google.gson.internal.bind.TreeTypeAdapter;
@@ -950,7 +950,7 @@ public final class GsonBuilder {
     factories.add(TypeAdapters.newFactory(long.class, Long.class, longAdapter));
     factories.add(TypeAdapters.newFactory(double.class, Double.class, doubleAdapter()));
     factories.add(TypeAdapters.newFactory(float.class, Float.class, floatAdapter()));
-    factories.add(NumberTypeAdapter.getFactory(numberToNumberStrategy));
+    factories.add(NumberTypeAdapters.getFactory(numberToNumberStrategy));
     factories.add(TypeAdapters.ATOMIC_INTEGER_FACTORY);
     factories.add(TypeAdapters.ATOMIC_BOOLEAN_FACTORY);
     factories.add(

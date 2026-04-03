@@ -22,6 +22,11 @@ import java.util.concurrent.atomic.AtomicLongArray;
 
 import com.google.gson.GsonBuilder;
 
+import com.google.gson.Gson;
+import com.google.gson.ToNumberPolicy;
+import com.google.gson.ToNumberStrategy;
+import com.google.gson.reflect.TypeToken;
+
 final class NumberTypeAdapters {
     private NumberTypeAdapters() {
         throw new UnsupportedOperationException();
@@ -439,4 +444,57 @@ final class NumberTypeAdapters {
 
     public static final TypeAdapterFactory LAZILY_PARSED_NUMBER_FACTORY =
             TypeAdapters.newFactory(LazilyParsedNumber.class, LAZILY_PARSED_NUMBER);
+
+    /** Type adapter for {@link Number}. */
+    private static class NumberAdapter extends TypeAdapter<Number> {
+        private final ToNumberStrategy toNumberStrategy;
+
+        private NumberAdapter(ToNumberStrategy toNumberStrategy) {
+            this.toNumberStrategy = toNumberStrategy;
+        }
+
+        @Override
+        public Number read(JsonReader in) throws IOException {
+            JsonToken jsonToken = in.peek();
+            switch (jsonToken) {
+                case NULL:
+                    in.nextNull();
+                    return null;
+                case NUMBER:
+                case STRING:
+                    return toNumberStrategy.readNumber(in);
+                default:
+                    throw new JsonSyntaxException(
+                        "Expecting number, got: " + jsonToken + "; at path " + in.getPath());
+            }
+        }
+
+        @Override
+        public void write(JsonWriter out, Number value) throws IOException {
+            out.value(value);
+        }
+    }
+
+    /** Gson default factory using {@link ToNumberPolicy#LAZILY_PARSED_NUMBER}. */
+    private static final TypeAdapterFactory LAZILY_PARSED_NUMBER_FACTORY_FOR_NUMBER =
+            newFactory(ToNumberPolicy.LAZILY_PARSED_NUMBER);
+
+    private static TypeAdapterFactory newFactory(ToNumberStrategy toNumberStrategy) {
+        NumberAdapter adapter = new NumberAdapter(toNumberStrategy);
+        return new TypeAdapterFactory() {
+            @SuppressWarnings("unchecked")
+            @Override
+            public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
+                return type.getRawType() == Number.class ? (TypeAdapter<T>) adapter : null;
+            }
+        };
+    }
+
+    public static TypeAdapterFactory getFactory(ToNumberStrategy toNumberStrategy) {
+        if (toNumberStrategy == ToNumberPolicy.LAZILY_PARSED_NUMBER) {
+            return LAZILY_PARSED_NUMBER_FACTORY_FOR_NUMBER;
+        } else {
+            return newFactory(toNumberStrategy);
+        }
+    }
 }
