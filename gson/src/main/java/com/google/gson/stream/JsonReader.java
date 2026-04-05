@@ -19,7 +19,7 @@ package com.google.gson.stream;
 import com.google.gson.Strictness;
 import com.google.gson.internal.JsonReaderInternalAccess;
 import com.google.gson.internal.TroubleshootingGuide;
-import com.google.gson.internal.bind.JsonTreeReader;
+import com.google.gson.internal.bind.tree.JsonTreeReader;
 import java.io.Closeable;
 import java.io.EOFException;
 import java.io.IOException;

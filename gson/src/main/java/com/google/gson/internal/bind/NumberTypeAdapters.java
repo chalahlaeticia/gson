@@ -27,7 +27,7 @@ import com.google.gson.ToNumberPolicy;
 import com.google.gson.ToNumberStrategy;
 import com.google.gson.reflect.TypeToken;
 
-final class NumberTypeAdapters {
+public final class NumberTypeAdapters {
     private NumberTypeAdapters() {
         throw new UnsupportedOperationException();
     }

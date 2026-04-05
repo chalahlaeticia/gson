@@ -441,9 +441,9 @@
                         <include>com/google/gson/internal/NumberLimits.java</include>
                         <include>com/google/gson/internal/Streams.java</include>
                         <include>com/google/gson/internal/TroubleshootingGuide.java</include>
-                        <include>com/google/gson/internal/bind/JsonElementTypeAdapter.java</include>
-                        <include>com/google/gson/internal/bind/JsonTreeReader.java</include>
-                        <include>com/google/gson/internal/bind/JsonTreeWriter.java</include>
+                        <include>com/google/gson/internal/bind/tree/JsonElementTypeAdapter.java</include>
+                        <include>com/google/gson/internal/bind/tree/JsonTreeReader.java</include>
+                        <include>com/google/gson/internal/bind/tree/JsonTreeWriter.java</include>
                       </includes>
                     </resource>
                   </resources>

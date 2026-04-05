@@ -22,7 +22,7 @@ import static org.junit.Assume.assumeTrue;
 import com.google.gson.JsonElement;
 import com.google.gson.Strictness;
 import com.google.gson.internal.Streams;
-import com.google.gson.internal.bind.JsonTreeReader;
+import com.google.gson.internal.bind.tree.JsonTreeReader;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.Arrays;

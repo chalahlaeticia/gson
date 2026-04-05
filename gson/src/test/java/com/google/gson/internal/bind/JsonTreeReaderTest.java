@@ -18,6 +18,8 @@ package com.google.gson.internal.bind;
 import static com.google.common.truth.Truth.assertThat;
 import static org.junit.Assert.assertThrows;
 
+import com.google.gson.internal.bind.tree.JsonTreeReader;
+
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonNull;

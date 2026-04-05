@@ -18,7 +18,7 @@ package com.google.gson;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import com.google.gson.internal.bind.JsonElementTypeAdapter;
+import com.google.gson.internal.bind.tree.JsonElementTypeAdapter;
 import java.util.Arrays;
 import org.junit.Test;
 import org.junit.runner.RunWith;
