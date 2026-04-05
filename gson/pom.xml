@@ -435,7 +435,7 @@
                         <include>com/google/gson/stream/package-info.java</include>
                         <!-- Internal classes used by the classes above -->
                         <include>com/google/gson/internal/JsonReaderInternalAccess.java</include>
-                        <include>com/google/gson/internal/LazilyParsedNumber.java</include>
+                        <include>com.google.gson.LazilyParsedNumber.java</include>
                         <include>com/google/gson/internal/LinkedTreeMap.java</include>
                         <include>com/google/gson/internal/NonNullElementWrapperList.java</include>
                         <include>com/google/gson/internal/NumberLimits.java</include>
@@ -479,7 +479,7 @@
                   <testIncludes>
                     <testInclude>com/google/gson/internal/bind/JsonTreeReaderTest.java</testInclude>
                     <testInclude>com/google/gson/internal/bind/JsonTreeWriterTest.java</testInclude>
-                    <testInclude>com/google/gson/internal/LazilyParsedNumberTest.java</testInclude>
+                    <testInclude>com.google.gson.LazilyParsedNumberTest.java</testInclude>
                     <testInclude>com/google/gson/internal/LinkedTreeMapSuiteTest.java</testInclude>
                     <testInclude>com/google/gson/internal/LinkedTreeMapTest.java</testInclude>
                     <testInclude>com/google/gson/internal/StreamsTest.java</testInclude>

@@ -10,7 +10,7 @@ import com.google.gson.JsonSyntaxException;
 import com.google.gson.ToNumberPolicy;
 import com.google.gson.ToNumberStrategy;
 import com.google.gson.TypeAdapter;
-import com.google.gson.internal.LazilyParsedNumber;
+import com.google.gson.LazilyParsedNumber;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonToken;
 import com.google.gson.stream.MalformedJsonException;

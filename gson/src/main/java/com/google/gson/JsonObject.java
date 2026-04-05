@@ -85,9 +85,7 @@ public final class JsonObject extends JsonElement {
   }
 
 
-  private JsonElement createPropertyValue(Object value) {
-    return value == null ? JsonNull.INSTANCE : new JsonPrimitive((String) value);
-  }
+  
 
   /**
    * Convenience method to add a string member. The specified value is converted to a {@link

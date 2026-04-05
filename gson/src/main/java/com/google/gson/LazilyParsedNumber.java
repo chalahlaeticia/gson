@@ -1,3 +1,4 @@
+package com.google.gson;
 /*
  * Copyright (C) 2011 Google Inc.
  *
@@ -13,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.google.gson.internal;
+
 
 import java.io.IOException;
 import java.io.InvalidObjectException;
@@ -21,14 +22,17 @@ import java.io.ObjectInputStream;
 import java.io.ObjectStreamException;
 import java.math.BigDecimal;
 
+import com.google.gson.internal.NumberLimits;
+
 /**
  * This class holds a number value that is lazily converted to a specific number type
  *
  * @author Inderjeet Singh
  */
-@SuppressWarnings("serial") // ignore warning about missing serialVersionUID
 public final class LazilyParsedNumber extends Number {
   private final String value;
+  private static final long serialVersionUID = 1L;
+
 
   /**
    * @param value must not be null

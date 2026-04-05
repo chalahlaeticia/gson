@@ -18,8 +18,7 @@ package com.google.gson;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.junit.Assert.assertThrows;
-
-import com.google.gson.internal.LazilyParsedNumber;
+import com.google.gson.LazilyParsedNumber;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.MalformedJsonException;
 import java.io.IOException;

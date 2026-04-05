@@ -24,7 +24,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonPrimitive;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.LongSerializationPolicy;
-import com.google.gson.internal.LazilyParsedNumber;
+import com.google.gson.LazilyParsedNumber;
 import com.google.gson.reflect.TypeToken;
 import java.io.Serializable;
 import java.io.StringReader;

@@ -16,6 +16,7 @@
 package com.google.gson.internal;
 
 import static com.google.common.truth.Truth.assertThat;
+import com.google.gson.LazilyParsedNumber;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;

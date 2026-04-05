@@ -3,7 +3,7 @@ package com.google.gson.internal.bind;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.TypeAdapter;
 import com.google.gson.TypeAdapterFactory;
-import com.google.gson.internal.LazilyParsedNumber;
+import com.google.gson.LazilyParsedNumber;
 import com.google.gson.internal.NumberLimits;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonToken;

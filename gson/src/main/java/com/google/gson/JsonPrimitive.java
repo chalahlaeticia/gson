@@ -15,8 +15,7 @@
  */
 
 package com.google.gson;
-
-import com.google.gson.internal.LazilyParsedNumber;
+import com.google.gson.LazilyParsedNumber;
 import com.google.gson.internal.NumberLimits;
 import java.math.BigDecimal;
 import java.math.BigInteger;

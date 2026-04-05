@@ -21,7 +21,7 @@ import static org.junit.Assert.assertThrows;
 
 import com.google.gson.FormattingStyle;
 import com.google.gson.Strictness;
-import com.google.gson.internal.LazilyParsedNumber;
+import com.google.gson.LazilyParsedNumber;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.math.BigDecimal;
@@ -591,7 +591,7 @@ public final class JsonWriterTest {
       assertThat(e)
           .hasMessageThat()
           .isEqualTo(
-              "String created by class com.google.gson.internal.LazilyParsedNumber is not a valid"
+              "String created by class com.google.gson.LazilyParsedNumber is not a valid"
                   + " JSON number: "
                   + malformedNumber);
     }
