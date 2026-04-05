@@ -42,20 +42,19 @@ class SqlTimestampTypeAdapter extends TypeAdapter<Timestamp> {
         }
       };
 
-  private final TypeAdapter<Date> dateTypeAdapter;
+  private final SqlTimestampStrategy strategy;
 
   private SqlTimestampTypeAdapter(TypeAdapter<Date> dateTypeAdapter) {
-    this.dateTypeAdapter = dateTypeAdapter;
+    this.strategy = new SqlTimestampStrategy(dateTypeAdapter);
   }
 
   @Override
   public Timestamp read(JsonReader in) throws IOException {
-    Date date = dateTypeAdapter.read(in);
-    return date != null ? new Timestamp(date.getTime()) : null;
+    return strategy.readFromReader(in);
   }
 
   @Override
   public void write(JsonWriter out, Timestamp value) throws IOException {
-    dateTypeAdapter.write(out, value);
+    strategy.writeToWriter(out, value);
   }
 }

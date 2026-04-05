@@ -25,11 +25,6 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonToken;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.TimeZone;
 
 /**
  * Adapter for java.sql.Date. Although this class appears stateless, it is not. DateFormat captures
@@ -49,7 +44,7 @@ final class SqlDateTypeAdapter extends TypeAdapter<java.sql.Date> {
         }
       };
 
-  private final DateFormat format = new SimpleDateFormat("MMM d, yyyy");
+  private final SqlValueStrategy<java.sql.Date> strategy = new SqlDateStrategy();
 
   private SqlDateTypeAdapter() {}
 
@@ -60,17 +55,11 @@ final class SqlDateTypeAdapter extends TypeAdapter<java.sql.Date> {
       return null;
     }
     String s = in.nextString();
-    synchronized (this) {
-      TimeZone originalTimeZone = format.getTimeZone(); // Save the original time zone
-      try {
-        Date utilDate = format.parse(s);
-        return new java.sql.Date(utilDate.getTime());
-      } catch (ParseException e) {
-        throw new JsonSyntaxException(
-            "Failed parsing '" + s + "' as SQL Date; at path " + in.getPreviousPath(), e);
-      } finally {
-        format.setTimeZone(originalTimeZone); // Restore the original time zone after parsing
-      }
+    try {
+      return strategy.fromJsonString(s);
+    } catch (Exception e) {
+      throw new JsonSyntaxException(
+          "Failed parsing '" + s + "' as SQL Date; at path " + in.getPreviousPath(), e);
     }
   }
 
@@ -80,10 +69,6 @@ final class SqlDateTypeAdapter extends TypeAdapter<java.sql.Date> {
       out.nullValue();
       return;
     }
-    String dateString;
-    synchronized (this) {
-      dateString = format.format(value);
-    }
-    out.value(dateString);
+    out.value(strategy.toJsonString(value));
   }
 }
